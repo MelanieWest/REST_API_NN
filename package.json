@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/MelanieWest/REST_API_NN/issues"
   },
-  "homepage": "https://github.com/MelanieWest/REST_API_NN#readme"
+  "homepage": "https://github.com/MelanieWest/REST_API_NN#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
