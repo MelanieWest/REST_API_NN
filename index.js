@@ -2,8 +2,8 @@
 //the program knows where to look for it so I don't have to name the path
 
 const express = require('express');
-//I need to link with the routes/api file, which contains all my routes:
-const routes = require('/routes/api');
+//I need to link with the api file in the routes folder, which contains all my routes:
+const routes = require('./routes/api');
 
 //set up express app function, which has many http methods
 //(such as get, post, etc) built into it
