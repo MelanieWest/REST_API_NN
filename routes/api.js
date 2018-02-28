@@ -12,7 +12,21 @@ const Ninja = require('../models/ninja');
 //get a list of ninjas from the database
 router.get('/ninjas', function(req,res,next){
     //to test the route, we are just sending a simple response object
-  res.send({type:'GET'});
+    //res.send({type:'GET'});    //this is a dummy response to test the route and return something
+ 
+    // Ninja.find({}).then(function(ninjas){   //this method will find all the ninjas
+    //     res.send(ninjas);
+    // })
+
+  
+ Ninja.aggregate().near({
+   near: [parseFloat(req.query.lng), parseFloat(req.query.lat)],
+   maxDistance: 100000,
+   spherical: true,
+   distanceField: "dist.calculated"
+  }).then(function(ninjas){
+        res.send(ninjas);
+    });
 });
 
 //add a new ninja to the db
