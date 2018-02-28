@@ -33,7 +33,7 @@ router.post('/ninjas', function(req,res,next){
         res.send(ninja);        //this is what the user sees
     }).catch(next);
 
-        //this was used when we directly sent a json object using Postman, but no data storage
+        //this was used when we directly sent back a json object using Postman, but no data storage
     // res.send({
     //     type:'POST',
     //     name: req.body.name,
@@ -42,13 +42,29 @@ router.post('/ninjas', function(req,res,next){
 });
 
 //update a ninja in the db
+//for now we are manually entering the id;  I'd like to do this automatically
 router.put('/ninjas/:id', function(req,res,next){
-    res.send({type:'PUT'});
+   // console.log(req.params.id);
+   //find by id and add new data received from the request body
+   Ninja.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
+       //don't put 'ninja' in the function to be sent back or it will send back the old version.
+       //instead, look up the same ninja again after the update to get the new version
+        Ninja.findOne({_id:req.params.id}).then(function(ninja){
+            res.send(ninja);
+        }); //after updating it, find it again so the updated version can be sent back
+    });
 });
 
 //delete a specific ninja from the db
 router.delete('/ninjas/:id', function(req,res,next){
-    res.send({type:'DELETE'});
+    //console.log(req.params.id);
+
+    //use a mongoose-provided method called 'findByIdAndRemove'
+    //so far we have to look up the id manually and provide it to the browser
+    Ninja.findByIdAndRemove({_id:req.params.id}).then(function(ninja){
+        res.send(ninja);
+    });
+    //res.send({type:'DELETE'});
 });
 
 
