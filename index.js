@@ -15,6 +15,9 @@ const mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost/ninjago');
 mongoose.Promise = global.Promise;
 
+//enable my program to interact with a front-end in the 'public' folder
+app.use(express.static('public'));
+
 //use bodyParser before routes, so the body data is json parsed before being sent
 //(this is middleware #1)
 app.use(bodyParser.json());
