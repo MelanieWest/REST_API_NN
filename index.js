@@ -43,5 +43,4 @@ app.listen(process.env.port || 4000, function(){
 });
 
 //i am adding this comment to test my ssh key
-//I just followed the new ssh instructions very carefully.
-//sooo... now I will try again to use it...
+//I updated to the newest version of git, on 3/6/18.
